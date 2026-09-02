@@ -1,18 +1,28 @@
-# 🔍 GenAI Smart Keyword Extractor & Social Link Generator
+# ✨ GenAI-Smart-Keyword-Extractor
 
-A Generative AI-powered tool leveraging **Google Gemini API** to automatically extract high-intent keywords from unstructured text, generate cross-platform search queries (Google, YouTube, Instagram, X/Twitter), and synthesize contextual AI prompts.
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-purple?style=for-the-badge&logo=github)](https://jigyasha1712.github.io/GenAI_Smart_Keyword_Extractor/)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Google Gemini API](https://img.shields.io/badge/Google_Gemini-1.5_Pro-blueviolet?style=for-the-badge&logo=google)](https://ai.google.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-## 🚀 Key Features
-- **Gemini NLP Engine**: Extracts top ranking semantic keywords from paragraphs or articles.
-- **Omni-Channel Query Builder**: Automatically generates direct deep-links for Google Search, YouTube, Instagram Hashtags, and X (Twitter).
-- **Synthetic Profile & Prompt Synthesizer**: Generates realistic test identities and diffusion prompts.
+A Generative AI-powered keyword extraction engine and omni-channel social query generator utilizing the **Google Gemini Pro API** to uncover buyer search intent, generate high-converting SEO keywords, and structure social search tags.
 
-## 📦 Setup & Usage
-```bash
-git clone https://github.com/<your-username>/GenAI-Smart-Keyword-Extractor.git
-cd GenAI-Smart-Keyword-Extractor
-pip install -r requirements.txt
-python main.py
+---
+
+## 🌟 Live Interactive Web Demo
+Experience the live Gemini keyword extractor:  
+👉 **[https://jigyasha1712.github.io/GenAI_Smart_Keyword_Extractor/](https://jigyasha1712.github.io/GenAI_Smart_Keyword_Extractor/)**
+
+---
+
+## 📁 Repository Structure
+```
+├── index.html                    # Interactive PromptLex UI (GitHub Pages)
+├── main.py                       # Main Gemini API integration controller
+├── fake_identity.py              # Synthetic profile & query generator
+├── requirements.txt              # Dependencies (google-generativeai, python-dotenv)
+├── .env.example                  # Gemini API Key configuration template
+└── README.md
 ```
 
 ## 📄 License
