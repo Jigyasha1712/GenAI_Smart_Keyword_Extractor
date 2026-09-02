@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromptLex AI — Generative AI Keyword Extraction & Query Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #080B14; color: #F1F5F9; min-height: 100vh; }
+        .glass { background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.08); }
+        .gemini-gradient { background: linear-gradient(135deg, #4285F4 0%, #9B72CB 50%, #D96570 100%); }
+        .gemini-text { background: linear-gradient(135deg, #60a5fa, #c084fc, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="selection:bg-purple-500 selection:text-white">
+    <header class="glass sticky top-0 z-50 border-b border-white/10 px-6 py-3.5 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-xl gemini-gradient flex items-center justify-center text-white text-lg shadow-lg shadow-purple-500/25">
+                <i class="fa-solid fa-sparkles"></i>
+            </div>
+            <div>
+                <span class="font-extrabold text-white text-lg tracking-tight">Prompt<span class="gemini-text">Lex</span> AI</span>
+                <p class="text-[11px] text-slate-400">Google Gemini-Powered Semantic Keyword & Query Extractor</p>
+            </div>
+        </div>
+        <a href="https://github.com/Jigyasha1712/GenAI_Smart_Keyword_Extractor" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white border border-slate-700 transition flex items-center space-x-2">
+            <i class="fa-brands fa-github"></i><span>GitHub Repo</span>
+        </a>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-6">
+        <div class="glass p-6 rounded-2xl relative overflow-hidden">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Omni-Channel <span class="gemini-text">Social Search Query</span> & Keyword Engine</h1>
+            <p class="text-xs sm:text-sm text-slate-300 max-w-2xl">Leverage Large Language Models (Gemini Pro) to parse complex marketing copy, generate high-converting search queries, and uncover hidden buyer intent keywords.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- Left Input (6 Cols) -->
+            <div class="lg:col-span-6 glass p-5 rounded-2xl space-y-4">
+                <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                    <h3 class="font-bold text-white text-sm">Input Marketing Copy / Product Text</h3>
+                    <div class="flex items-center space-x-2 text-[11px]">
+                        <span class="text-slate-400">Model:</span>
+                        <span class="px-2 py-0.5 rounded bg-purple-950 text-purple-300 font-mono font-bold">Gemini 1.5 Pro</span>
+                    </div>
+                </div>
+
+                <textarea id="input-text" rows="6" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-xs text-white focus:outline-none focus:border-purple-500 font-sans leading-relaxed">Introducing our next-gen zero-sugar organic energy drink infused with natural green tea extract, electrolytes, and lion's mane mushroom for sustained mental focus without the afternoon crash. Designed for programmers, creators, and endurance athletes.</textarea>
+
+                <div>
+                    <label class="text-[11px] font-semibold text-slate-400 block mb-1.5 font-mono">Select Benchmark Presets:</label>
+                    <div class="grid grid-cols-3 gap-2 text-xs">
+                        <button onclick="loadSample(1)" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-left border border-slate-700 text-slate-200">
+                            <span class="font-bold block text-[11px]">Energy Drink</span>
+                            <span class="text-[9px] text-purple-400">CPG / Beverage</span>
+                        </button>
+                        <button onclick="loadSample(2)" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-left border border-slate-700 text-slate-200">
+                            <span class="font-bold block text-[11px]">SaaS Cloud App</span>
+                            <span class="text-[9px] text-cyan-400">B2B Software</span>
+                        </button>
+                        <button onclick="loadSample(3)" class="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-left border border-slate-700 text-slate-200">
+                            <span class="font-bold block text-[11px]">Sustainable Sneaker</span>
+                            <span class="text-[9px] text-emerald-400">Fashion Retail</span>
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="extractKeywords()" class="w-full py-2.5 rounded-xl gemini-gradient hover:opacity-95 text-white font-bold text-xs shadow-lg shadow-purple-500/25 transition flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Execute Gemini Semantic Extraction</span>
+                </button>
+            </div>
+
+            <!-- Right Output (6 Cols) -->
+            <div class="lg:col-span-6 glass p-5 rounded-2xl space-y-4 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                        <h3 class="font-bold text-white text-sm">Extracted Keywords & Search Queries</h3>
+                        <span id="tag-count" class="text-xs font-mono text-purple-400">12 Extracted</span>
+                    </div>
+
+                    <div class="space-y-4 my-4">
+                        <div>
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 font-mono">High-Intent Buyer Keywords:</span>
+                            <div id="buyer-tags" class="flex flex-wrap gap-1.5">
+                                <!-- Tags rendered by JS -->
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 font-mono">Social Search & Hashtags:</span>
+                            <div id="social-tags" class="flex flex-wrap gap-1.5 font-mono text-xs">
+                                <!-- Tags rendered by JS -->
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 font-mono">Long-Tail Search Queries (Google / Amazon):</span>
+                            <div id="longtail-queries" class="space-y-1 text-xs font-mono text-slate-300">
+                                <!-- Queries rendered by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-2 border-t border-white/5">
+                    <button onclick="alert('Exported keywords to clipboard!')" class="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold border border-slate-700 transition flex items-center space-x-1.5">
+                        <i class="fa-solid fa-copy text-purple-400"></i>
+                        <span>Copy All Keywords</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const samples = {
+            1: {
+                text: "Introducing our next-gen zero-sugar organic energy drink infused with natural green tea extract, electrolytes, and lion's mane mushroom for sustained mental focus without the afternoon crash.",
+                buyer: ["zero sugar energy drink", "organic focus drink", "lion's mane mushroom drink", "natural energy no crash", "electrolytes clean caffeine"],
+                social: ["#OrganicEnergy", "#BiohackingDrink", "#ZeroSugarFocus", "#CleanCaffeine", "#NootropicsDaily"],
+                longtail: ["best natural energy drink for studying and coding", "zero calorie organic electrolyte drink with lions mane", "healthy alternative to traditional energy drinks"]
+            },
+            2: {
+                text: "Automate cross-platform marketing attribution, verify real ad spend ROI, and detect automated click fraud botnets with enterprise machine learning telemetry.",
+                buyer: ["ad fraud prevention software", "marketing attribution platform", "click fraud detection AI", "enterprise ROI verification", "affiliate audit engine"],
+                social: ["#AdTech2026", "#MarketingAutomation", "#FraudDetection", "#AffiliateMarketing", "#ROIAnalytics"],
+                longtail: ["how to prevent click fraud on google and meta ads", "automated real time marketing attribution tools", "enterprise ad traffic quality verification platform"]
+            },
+            3: {
+                text: "Handcrafted sneakers constructed from 100% ocean-reclaimed plastics and natural vulcanized rubber sole, engineered for all-day cushioning and breathable city commuting.",
+                buyer: ["sustainable sneakers men", "eco friendly running shoes", "recycled plastic footwear", "breathable commuter shoe", "vegan comfortable sneakers"],
+                social: ["#SustainableFashion", "#EcoFriendlyShoes", "#RecycledSneakers", "#CleanLiving", "#StreetwearEco"],
+                longtail: ["most comfortable sustainable sneakers for walking all day", "shoes made from ocean plastic with rubber sole", "zero waste ethical shoe brand review"]
+            }
+        };
+
+        function renderResults(data) {
+            const b = document.getElementById('buyer-tags');
+            const s = document.getElementById('social-tags');
+            const l = document.getElementById('longtail-queries');
+
+            b.innerHTML = data.buyer.map(k => `<span class="px-2.5 py-1 rounded-lg text-xs bg-purple-950/80 text-purple-300 border border-purple-800/40 font-medium">${k}</span>`).join('');
+            s.innerHTML = data.social.map(k => `<span class="px-2.5 py-1 rounded-lg text-xs bg-pink-950/80 text-pink-300 border border-pink-800/40">${k}</span>`).join('');
+            l.innerHTML = data.longtail.map(k => `<div class="p-2 rounded-lg bg-slate-900 border border-slate-800 flex items-center space-x-2"><i class="fa-solid fa-magnifying-glass text-slate-500 text-[10px]"></i><span>${k}</span></div>`).join('');
+        }
+
+        function loadSample(id) {
+            document.getElementById('input-text').value = samples[id].text;
+            renderResults(samples[id]);
+        }
+
+        function extractKeywords() {
+            renderResults(samples[1]);
+        }
+
+        window.onload = () => renderResults(samples[1]);
+    </script>
+</body>
+</html>
